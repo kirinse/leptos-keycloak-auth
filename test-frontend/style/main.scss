@@ -5,7 +5,7 @@
 }
 
 html {
-    font-size: 16px;
+    font-size: 14px;
     height: 100%;
 }
 
@@ -23,4 +23,243 @@ body {
 
 [data-theme="dark"] {
     --brand-color: #8856e6;
+}
+
+#GalaxyAccountsMessageBar a:not(:hover){
+    background-position:0 100%;
+    background-size:100% 1px!important;
+    background-repeat:repeat-x;
+}
+
+// @-moz-keyframes GalaxyAccountsFrameContainer-spin{
+//     100%{
+//         -moz-transform:rotate(360deg);
+//         transform:rotate(360deg)
+//     }
+// }
+// @-o-keyframes GalaxyAccountsFrameContainer-spin{
+//     100%{
+//         -o-transform:rotate(360deg);
+//         transform:rotate(360deg)
+//     }
+// }
+// @-webkit-keyframes GalaxyAccountsFrameContainer-spin{
+//     100%{
+//         -webkit-transform:rotate(360deg);
+//         transform:rotate(360deg)
+//     }
+// }
+
+@keyframes GalaxyAccountsFrameContainer-spin{
+    100%{
+        // -moz-transform:rotate(360deg);
+        // -ms-transform:rotate(360deg);
+        // -o-transform:rotate(360deg);
+        // -webkit-transform:rotate(360deg);
+        transform:rotate(360deg);
+    }
+}
+
+.l-flexible#GalaxyAccountsFrameContainer,.l-mobile#GalaxyAccountsFrameContainer{
+    position:absolute;
+    top:0;
+    z-index:2010;
+    width:100%;
+    height:100%;
+    text-align:center;
+    white-space:nowrap;
+}
+
+.l-flexible#GalaxyAccountsFrameContainer:after,.l-mobile#GalaxyAccountsFrameContainer:after{
+    content:'';
+    display:inline-block;
+    vertical-align:middle;
+    height:100%;
+    margin-right:-.25em;
+}
+
+.l-flexible#GalaxyAccountsFrameContainer:before,.l-mobile#GalaxyAccountsFrameContainer:before{
+    position:absolute;
+}
+
+.l-flexible .GalaxyAccountsFrameContainer__container,.l-mobile .GalaxyAccountsFrameContainer__container{
+    display:inline-block;
+    vertical-align:top;
+    position:relative;
+    padding:15px;
+    margin:-15px
+}
+
+.l-flexible iframe,.l-mobile iframe{
+    // -moz-box-shadow:0 0 15px rgba(0,0,0,.15),0 1px 3px rgba(0,0,0,.15);
+    // -webkit-box-shadow:0 0 15px rgba(0,0,0,.15),0 1px 3px rgba(0,0,0,.15);
+    box-shadow:0 0 15px rgba(0,0,0,.15),0 1px 3px rgba(0,0,0,.15)
+}
+
+#GalaxyAccountsFrameContainer{
+    position:static;
+    left:0
+}
+
+#GalaxyAccountsFrameContainer:before{
+    content:'';
+    width:.1em;
+    height:.1em;
+    // -moz-box-shadow:.475em 0 0 #000,.475em -.01em 0 rgba(0,0,0,.99333),.4745em -.02em 0 rgba(0,0,0,.98667),.474em -.03em 0 rgba(0,0,0,.98),.4735em -.04em 0 rgba(0,0,0,.97333),.4725em -.05em 0 rgba(0,0,0,.96667),.4715em -.06em 0 rgba(0,0,0,.96),.47em -.0695em 0 rgba(0,0,0,.95333),.4685em -.0795em 0 rgba(0,0,0,.94667),.4665em -.0895em 0 rgba(0,0,0,.94),.4645em -.099em 0 rgba(0,0,0,.93333),.4625em -.1085em 0 rgba(0,0,0,.92667),.46em -.1185em 0 rgba(0,0,0,.92),.4575em -.128em 0 rgba(0,0,0,.91333),.4545em -.1375em 0 rgba(0,0,0,.90667),.452em -.147em 0 rgba(0,0,0,.9),.4485em -.1565em 0 rgba(0,0,0,.89333),.445em -.166em 0 rgba(0,0,0,.88667),.4415em -.175em 0 rgba(0,0,0,.88),.438em -.1845em 0 rgba(0,0,0,.87333),.434em -.1935em 0 rgba(0,0,0,.86667),.43em -.2025em 0 rgba(0,0,0,.86),.4255em -.2115em 0 rgba(0,0,0,.85333),.421em -.2205em 0 rgba(0,0,0,.84667),.416em -.229em 0 rgba(0,0,0,.84),.4115em -.2375em 0 rgba(0,0,0,.83333),.4065em -.2465em 0 rgba(0,0,0,.82667),.401em -.255em 0 rgba(0,0,0,.82),.3955em -.263em 0 rgba(0,0,0,.81333),.39em -.2715em 0 rgba(0,0,0,.80667),.3845em -.2795em 0 rgba(0,0,0,.8),.3785em -.2875em 0 rgba(0,0,0,.79333),.3725em -.2955em 0 rgba(0,0,0,.78667),.366em -.303em 0 rgba(0,0,0,.78),.3595em -.3105em 0 rgba(0,0,0,.77333),.353em -.318em 0 rgba(0,0,0,.76667),.3465em -.3255em 0 rgba(0,0,0,.76),.3395em -.3325em 0 rgba(0,0,0,.75333),.3325em -.3395em 0 rgba(0,0,0,.74667),.325em -.3465em 0 rgba(0,0,0,.74),.318em -.353em 0 rgba(0,0,0,.73333),.3105em -.36em 0 rgba(0,0,0,.72667),.303em -.366em 0 rgba(0,0,0,.72),.295em -.3725em 0 rgba(0,0,0,.71333),.287em -.3785em 0 rgba(0,0,0,.70667),.279em -.3845em 0 rgba(0,0,0,.7),.271em -.3905em 0 rgba(0,0,0,.69333),.263em -.396em 0 rgba(0,0,0,.68667),.2545em -.4015em 0 rgba(0,0,0,.68),.246em -.4065em 0 rgba(0,0,0,.67333),.2375em -.4115em 0 rgba(0,0,0,.66667),.229em -.4165em 0 rgba(0,0,0,.66),.22em -.421em 0 rgba(0,0,0,.65333),.211em -.4255em 0 rgba(0,0,0,.64667),.202em -.43em 0 rgba(0,0,0,.64),.193em -.434em 0 rgba(0,0,0,.63333),.184em -.438em 0 rgba(0,0,0,.62667),.175em -.442em 0 rgba(0,0,0,.62),.1655em -.4455em 0 rgba(0,0,0,.61333),.156em -.449em 0 rgba(0,0,0,.60667),.147em -.452em 0 rgba(0,0,0,.6),.1375em -.455em 0 rgba(0,0,0,.59333),.1275em -.458em 0 rgba(0,0,0,.58667),.118em -.4605em 0 rgba(0,0,0,.58),.1085em -.4625em 0 rgba(0,0,0,.57333),.099em -.465em 0 rgba(0,0,0,.56667),.089em -.467em 0 rgba(0,0,0,.56),.079em -.4685em 0 rgba(0,0,0,.55333),.0695em -.47em 0 rgba(0,0,0,.54667),.0595em -.4715em 0 rgba(0,0,0,.54),.0495em -.4725em 0 rgba(0,0,0,.53333),.0395em -.4735em 0 rgba(0,0,0,.52667),.03em -.4745em 0 rgba(0,0,0,.52),.02em -.475em 0 rgba(0,0,0,.51333),.01em -.475em 0 rgba(0,0,0,.50667),0 -.475em 0 rgba(0,0,0,.5),-.01em -.475em 0 rgba(0,0,0,.49333),-.02em -.475em 0 rgba(0,0,0,.48667),-.03em -.4745em 0 rgba(0,0,0,.48),-.04em -.4735em 0 rgba(0,0,0,.47333),-.05em -.4725em 0 rgba(0,0,0,.46667),-.06em -.4715em 0 rgba(0,0,0,.46),-.0695em -.47em 0 rgba(0,0,0,.45333),-.0795em -.4685em 0 rgba(0,0,0,.44667),-.0895em -.467em 0 rgba(0,0,0,.44),-.099em -.465em 0 rgba(0,0,0,.43333),-.1085em -.4625em 0 rgba(0,0,0,.42667),-.1185em -.4605em 0 rgba(0,0,0,.42),-.128em -.458em 0 rgba(0,0,0,.41333),-.1375em -.455em 0 rgba(0,0,0,.40667),-.147em -.452em 0 rgba(0,0,0,.4),-.1565em -.449em 0 rgba(0,0,0,.39333),-.166em -.4455em 0 rgba(0,0,0,.38667),-.175em -.442em 0 rgba(0,0,0,.38),-.1845em -.438em 0 rgba(0,0,0,.37333),-.1935em -.434em 0 rgba(0,0,0,.36667),-.2025em -.43em 0 rgba(0,0,0,.36),-.2115em -.4255em 0 rgba(0,0,0,.35333),-.2205em -.421em 0 rgba(0,0,0,.34667),-.229em -.4165em 0 rgba(0,0,0,.34),-.2375em -.4115em 0 rgba(0,0,0,.33333),-.2465em -.4065em 0 rgba(0,0,0,.32667),-.255em -.4015em 0 rgba(0,0,0,.32),-.263em -.396em 0 rgba(0,0,0,.31333),-.2715em -.3905em 0 rgba(0,0,0,.30667),-.2795em -.3845em 0 rgba(0,0,0,.3),-.2875em -.3785em 0 rgba(0,0,0,.29333),-.2955em -.3725em 0 rgba(0,0,0,.28667),-.303em -.366em 0 rgba(0,0,0,.28),-.3105em -.36em 0 rgba(0,0,0,.27333),-.318em -.353em 0 rgba(0,0,0,.26667),-.3255em -.3465em 0 rgba(0,0,0,.26),-.3325em -.3395em 0 rgba(0,0,0,.25333),-.3395em -.3325em 0 rgba(0,0,0,.24667),-.3465em -.3255em 0 rgba(0,0,0,.24),-.353em -.318em 0 rgba(0,0,0,.23333),-.36em -.3105em 0 rgba(0,0,0,.22667),-.366em -.303em 0 rgba(0,0,0,.22),-.3725em -.2955em 0 rgba(0,0,0,.21333),-.3785em -.2875em 0 rgba(0,0,0,.20667),-.3845em -.2795em 0 rgba(0,0,0,.2),-.3905em -.2715em 0 rgba(0,0,0,.19333),-.396em -.263em 0 rgba(0,0,0,.18667),-.4015em -.255em 0 rgba(0,0,0,.18),-.4065em -.2465em 0 rgba(0,0,0,.17333),-.4115em -.238em 0 rgba(0,0,0,.16667),-.4165em -.229em 0 rgba(0,0,0,.16),-.421em -.2205em 0 rgba(0,0,0,.15333),-.4255em -.2115em 0 rgba(0,0,0,.14667),-.43em -.2025em 0 rgba(0,0,0,.14),-.434em -.1935em 0 rgba(0,0,0,.13333),-.438em -.1845em 0 rgba(0,0,0,.12667),-.442em -.175em 0 rgba(0,0,0,.12),-.4455em -.166em 0 rgba(0,0,0,.11333),-.449em -.1565em 0 rgba(0,0,0,.10667),-.452em -.147em 0 rgba(0,0,0,.1),-.455em -.1375em 0 rgba(0,0,0,.09333),-.458em -.128em 0 rgba(0,0,0,.08667),-.4605em -.1185em 0 rgba(0,0,0,.08),-.4625em -.1085em 0 rgba(0,0,0,.07333),-.465em -.099em 0 rgba(0,0,0,.06667),-.467em -.0895em 0 rgba(0,0,0,.06),-.4685em -.0795em 0 rgba(0,0,0,.05333),-.47em -.0695em 0 rgba(0,0,0,.04667),-.4715em -.06em 0 rgba(0,0,0,.04),-.4725em -.05em 0 rgba(0,0,0,.03333),-.4735em -.04em 0 rgba(0,0,0,.02667),-.4745em -.03em 0 rgba(0,0,0,.02),-.475em -.02em 0 rgba(0,0,0,.01333),-.475em -.01em 0 rgba(0,0,0,.00667);
+    
+    // -webkit-box-shadow:.475em 0 0 #000,.475em -.01em 0 rgba(0,0,0,.99333),.4745em -.02em 0 rgba(0,0,0,.98667),.474em -.03em 0 rgba(0,0,0,.98),.4735em -.04em 0 rgba(0,0,0,.97333),.4725em -.05em 0 rgba(0,0,0,.96667),.4715em -.06em 0 rgba(0,0,0,.96),.47em -.0695em 0 rgba(0,0,0,.95333),.4685em -.0795em 0 rgba(0,0,0,.94667),.4665em -.0895em 0 rgba(0,0,0,.94),.4645em -.099em 0 rgba(0,0,0,.93333),.4625em -.1085em 0 rgba(0,0,0,.92667),.46em -.1185em 0 rgba(0,0,0,.92),.4575em -.128em 0 rgba(0,0,0,.91333),.4545em -.1375em 0 rgba(0,0,0,.90667),.452em -.147em 0 rgba(0,0,0,.9),.4485em -.1565em 0 rgba(0,0,0,.89333),.445em -.166em 0 rgba(0,0,0,.88667),.4415em -.175em 0 rgba(0,0,0,.88),.438em -.1845em 0 rgba(0,0,0,.87333),.434em -.1935em 0 rgba(0,0,0,.86667),.43em -.2025em 0 rgba(0,0,0,.86),.4255em -.2115em 0 rgba(0,0,0,.85333),.421em -.2205em 0 rgba(0,0,0,.84667),.416em -.229em 0 rgba(0,0,0,.84),.4115em -.2375em 0 rgba(0,0,0,.83333),.4065em -.2465em 0 rgba(0,0,0,.82667),.401em -.255em 0 rgba(0,0,0,.82),.3955em -.263em 0 rgba(0,0,0,.81333),.39em -.2715em 0 rgba(0,0,0,.80667),.3845em -.2795em 0 rgba(0,0,0,.8),.3785em -.2875em 0 rgba(0,0,0,.79333),.3725em -.2955em 0 rgba(0,0,0,.78667),.366em -.303em 0 rgba(0,0,0,.78),.3595em -.3105em 0 rgba(0,0,0,.77333),.353em -.318em 0 rgba(0,0,0,.76667),.3465em -.3255em 0 rgba(0,0,0,.76),.3395em -.3325em 0 rgba(0,0,0,.75333),.3325em -.3395em 0 rgba(0,0,0,.74667),.325em -.3465em 0 rgba(0,0,0,.74),.318em -.353em 0 rgba(0,0,0,.73333),.3105em -.36em 0 rgba(0,0,0,.72667),.303em -.366em 0 rgba(0,0,0,.72),.295em -.3725em 0 rgba(0,0,0,.71333),.287em -.3785em 0 rgba(0,0,0,.70667),.279em -.3845em 0 rgba(0,0,0,.7),.271em -.3905em 0 rgba(0,0,0,.69333),.263em -.396em 0 rgba(0,0,0,.68667),.2545em -.4015em 0 rgba(0,0,0,.68),.246em -.4065em 0 rgba(0,0,0,.67333),.2375em -.4115em 0 rgba(0,0,0,.66667),.229em -.4165em 0 rgba(0,0,0,.66),.22em -.421em 0 rgba(0,0,0,.65333),.211em -.4255em 0 rgba(0,0,0,.64667),.202em -.43em 0 rgba(0,0,0,.64),.193em -.434em 0 rgba(0,0,0,.63333),.184em -.438em 0 rgba(0,0,0,.62667),.175em -.442em 0 rgba(0,0,0,.62),.1655em -.4455em 0 rgba(0,0,0,.61333),.156em -.449em 0 rgba(0,0,0,.60667),.147em -.452em 0 rgba(0,0,0,.6),.1375em -.455em 0 rgba(0,0,0,.59333),.1275em -.458em 0 rgba(0,0,0,.58667),.118em -.4605em 0 rgba(0,0,0,.58),.1085em -.4625em 0 rgba(0,0,0,.57333),.099em -.465em 0 rgba(0,0,0,.56667),.089em -.467em 0 rgba(0,0,0,.56),.079em -.4685em 0 rgba(0,0,0,.55333),.0695em -.47em 0 rgba(0,0,0,.54667),.0595em -.4715em 0 rgba(0,0,0,.54),.0495em -.4725em 0 rgba(0,0,0,.53333),.0395em -.4735em 0 rgba(0,0,0,.52667),.03em -.4745em 0 rgba(0,0,0,.52),.02em -.475em 0 rgba(0,0,0,.51333),.01em -.475em 0 rgba(0,0,0,.50667),0 -.475em 0 rgba(0,0,0,.5),-.01em -.475em 0 rgba(0,0,0,.49333),-.02em -.475em 0 rgba(0,0,0,.48667),-.03em -.4745em 0 rgba(0,0,0,.48),-.04em -.4735em 0 rgba(0,0,0,.47333),-.05em -.4725em 0 rgba(0,0,0,.46667),-.06em -.4715em 0 rgba(0,0,0,.46),-.0695em -.47em 0 rgba(0,0,0,.45333),-.0795em -.4685em 0 rgba(0,0,0,.44667),-.0895em -.467em 0 rgba(0,0,0,.44),-.099em -.465em 0 rgba(0,0,0,.43333),-.1085em -.4625em 0 rgba(0,0,0,.42667),-.1185em -.4605em 0 rgba(0,0,0,.42),-.128em -.458em 0 rgba(0,0,0,.41333),-.1375em -.455em 0 rgba(0,0,0,.40667),-.147em -.452em 0 rgba(0,0,0,.4),-.1565em -.449em 0 rgba(0,0,0,.39333),-.166em -.4455em 0 rgba(0,0,0,.38667),-.175em -.442em 0 rgba(0,0,0,.38),-.1845em -.438em 0 rgba(0,0,0,.37333),-.1935em -.434em 0 rgba(0,0,0,.36667),-.2025em -.43em 0 rgba(0,0,0,.36),-.2115em -.4255em 0 rgba(0,0,0,.35333),-.2205em -.421em 0 rgba(0,0,0,.34667),-.229em -.4165em 0 rgba(0,0,0,.34),-.2375em -.4115em 0 rgba(0,0,0,.33333),-.2465em -.4065em 0 rgba(0,0,0,.32667),-.255em -.4015em 0 rgba(0,0,0,.32),-.263em -.396em 0 rgba(0,0,0,.31333),-.2715em -.3905em 0 rgba(0,0,0,.30667),-.2795em -.3845em 0 rgba(0,0,0,.3),-.2875em -.3785em 0 rgba(0,0,0,.29333),-.2955em -.3725em 0 rgba(0,0,0,.28667),-.303em -.366em 0 rgba(0,0,0,.28),-.3105em -.36em 0 rgba(0,0,0,.27333),-.318em -.353em 0 rgba(0,0,0,.26667),-.3255em -.3465em 0 rgba(0,0,0,.26),-.3325em -.3395em 0 rgba(0,0,0,.25333),-.3395em -.3325em 0 rgba(0,0,0,.24667),-.3465em -.3255em 0 rgba(0,0,0,.24),-.353em -.318em 0 rgba(0,0,0,.23333),-.36em -.3105em 0 rgba(0,0,0,.22667),-.366em -.303em 0 rgba(0,0,0,.22),-.3725em -.2955em 0 rgba(0,0,0,.21333),-.3785em -.2875em 0 rgba(0,0,0,.20667),-.3845em -.2795em 0 rgba(0,0,0,.2),-.3905em -.2715em 0 rgba(0,0,0,.19333),-.396em -.263em 0 rgba(0,0,0,.18667),-.4015em -.255em 0 rgba(0,0,0,.18),-.4065em -.2465em 0 rgba(0,0,0,.17333),-.4115em -.238em 0 rgba(0,0,0,.16667),-.4165em -.229em 0 rgba(0,0,0,.16),-.421em -.2205em 0 rgba(0,0,0,.15333),-.4255em -.2115em 0 rgba(0,0,0,.14667),-.43em -.2025em 0 rgba(0,0,0,.14),-.434em -.1935em 0 rgba(0,0,0,.13333),-.438em -.1845em 0 rgba(0,0,0,.12667),-.442em -.175em 0 rgba(0,0,0,.12),-.4455em -.166em 0 rgba(0,0,0,.11333),-.449em -.1565em 0 rgba(0,0,0,.10667),-.452em -.147em 0 rgba(0,0,0,.1),-.455em -.1375em 0 rgba(0,0,0,.09333),-.458em -.128em 0 rgba(0,0,0,.08667),-.4605em -.1185em 0 rgba(0,0,0,.08),-.4625em -.1085em 0 rgba(0,0,0,.07333),-.465em -.099em 0 rgba(0,0,0,.06667),-.467em -.0895em 0 rgba(0,0,0,.06),-.4685em -.0795em 0 rgba(0,0,0,.05333),-.47em -.0695em 0 rgba(0,0,0,.04667),-.4715em -.06em 0 rgba(0,0,0,.04),-.4725em -.05em 0 rgba(0,0,0,.03333),-.4735em -.04em 0 rgba(0,0,0,.02667),-.4745em -.03em 0 rgba(0,0,0,.02),-.475em -.02em 0 rgba(0,0,0,.01333),-.475em -.01em 0 rgba(0,0,0,.00667);
+    
+    box-shadow: .475em 0 0 #000,.475em -.01em 0 rgba(0,0,0,.99333),.4745em -.02em 0 rgba(0,0,0,.98667),.474em -.03em 0 rgba(0,0,0,.98),.4735em -.04em 0 rgba(0,0,0,.97333),.4725em -.05em 0 rgba(0,0,0,.96667),.4715em -.06em 0 rgba(0,0,0,.96),.47em -.0695em 0 rgba(0,0,0,.95333),.4685em -.0795em 0 rgba(0,0,0,.94667),.4665em -.0895em 0 rgba(0,0,0,.94),.4645em -.099em 0 rgba(0,0,0,.93333),.4625em -.1085em 0 rgba(0,0,0,.92667),.46em -.1185em 0 rgba(0,0,0,.92),.4575em -.128em 0 rgba(0,0,0,.91333),.4545em -.1375em 0 rgba(0,0,0,.90667),.452em -.147em 0 rgba(0,0,0,.9),.4485em -.1565em 0 rgba(0,0,0,.89333),.445em -.166em 0 rgba(0,0,0,.88667),.4415em -.175em 0 rgba(0,0,0,.88),.438em -.1845em 0 rgba(0,0,0,.87333),.434em -.1935em 0 rgba(0,0,0,.86667),.43em -.2025em 0 rgba(0,0,0,.86),.4255em -.2115em 0 rgba(0,0,0,.85333),.421em -.2205em 0 rgba(0,0,0,.84667),.416em -.229em 0 rgba(0,0,0,.84),.4115em -.2375em 0 rgba(0,0,0,.83333),.4065em -.2465em 0 rgba(0,0,0,.82667),.401em -.255em 0 rgba(0,0,0,.82),.3955em -.263em 0 rgba(0,0,0,.81333),.39em -.2715em 0 rgba(0,0,0,.80667),.3845em -.2795em 0 rgba(0,0,0,.8),.3785em -.2875em 0 rgba(0,0,0,.79333),.3725em -.2955em 0 rgba(0,0,0,.78667),.366em -.303em 0 rgba(0,0,0,.78),.3595em -.3105em 0 rgba(0,0,0,.77333),.353em -.318em 0 rgba(0,0,0,.76667),.3465em -.3255em 0 rgba(0,0,0,.76),.3395em -.3325em 0 rgba(0,0,0,.75333),.3325em -.3395em 0 rgba(0,0,0,.74667),.325em -.3465em 0 rgba(0,0,0,.74),.318em -.353em 0 rgba(0,0,0,.73333),.3105em -.36em 0 rgba(0,0,0,.72667),.303em -.366em 0 rgba(0,0,0,.72),.295em -.3725em 0 rgba(0,0,0,.71333),.287em -.3785em 0 rgba(0,0,0,.70667),.279em -.3845em 0 rgba(0,0,0,.7),.271em -.3905em 0 rgba(0,0,0,.69333),.263em -.396em 0 rgba(0,0,0,.68667),.2545em -.4015em 0 rgba(0,0,0,.68),.246em -.4065em 0 rgba(0,0,0,.67333),.2375em -.4115em 0 rgba(0,0,0,.66667),.229em -.4165em 0 rgba(0,0,0,.66),.22em -.421em 0 rgba(0,0,0,.65333),.211em -.4255em 0 rgba(0,0,0,.64667),.202em -.43em 0 rgba(0,0,0,.64),.193em -.434em 0 rgba(0,0,0,.63333),.184em -.438em 0 rgba(0,0,0,.62667),.175em -.442em 0 rgba(0,0,0,.62),.1655em -.4455em 0 rgba(0,0,0,.61333),.156em -.449em 0 rgba(0,0,0,.60667),.147em -.452em 0 rgba(0,0,0,.6),.1375em -.455em 0 rgba(0,0,0,.59333),.1275em -.458em 0 rgba(0,0,0,.58667),.118em -.4605em 0 rgba(0,0,0,.58),.1085em -.4625em 0 rgba(0,0,0,.57333),.099em -.465em 0 rgba(0,0,0,.56667),.089em -.467em 0 rgba(0,0,0,.56),.079em -.4685em 0 rgba(0,0,0,.55333),.0695em -.47em 0 rgba(0,0,0,.54667),.0595em -.4715em 0 rgba(0,0,0,.54),.0495em -.4725em 0 rgba(0,0,0,.53333),.0395em -.4735em 0 rgba(0,0,0,.52667),.03em -.4745em 0 rgba(0,0,0,.52),.02em -.475em 0 rgba(0,0,0,.51333),.01em -.475em 0 rgba(0,0,0,.50667),0 -.475em 0 rgba(0,0,0,.5),-.01em -.475em 0 rgba(0,0,0,.49333),-.02em -.475em 0 rgba(0,0,0,.48667),-.03em -.4745em 0 rgba(0,0,0,.48),-.04em -.4735em 0 rgba(0,0,0,.47333),-.05em -.4725em 0 rgba(0,0,0,.46667),-.06em -.4715em 0 rgba(0,0,0,.46),-.0695em -.47em 0 rgba(0,0,0,.45333),-.0795em -.4685em 0 rgba(0,0,0,.44667),-.0895em -.467em 0 rgba(0,0,0,.44),-.099em -.465em 0 rgba(0,0,0,.43333),-.1085em -.4625em 0 rgba(0,0,0,.42667),-.1185em -.4605em 0 rgba(0,0,0,.42),-.128em -.458em 0 rgba(0,0,0,.41333),-.1375em -.455em 0 rgba(0,0,0,.40667),-.147em -.452em 0 rgba(0,0,0,.4),-.1565em -.449em 0 rgba(0,0,0,.39333),-.166em -.4455em 0 rgba(0,0,0,.38667),-.175em -.442em 0 rgba(0,0,0,.38),-.1845em -.438em 0 rgba(0,0,0,.37333),-.1935em -.434em 0 rgba(0,0,0,.36667),-.2025em -.43em 0 rgba(0,0,0,.36),-.2115em -.4255em 0 rgba(0,0,0,.35333),-.2205em -.421em 0 rgba(0,0,0,.34667),-.229em -.4165em 0 rgba(0,0,0,.34),-.2375em -.4115em 0 rgba(0,0,0,.33333),-.2465em -.4065em 0 rgba(0,0,0,.32667),-.255em -.4015em 0 rgba(0,0,0,.32),-.263em -.396em 0 rgba(0,0,0,.31333),-.2715em -.3905em 0 rgba(0,0,0,.30667),-.2795em -.3845em 0 rgba(0,0,0,.3),-.2875em -.3785em 0 rgba(0,0,0,.29333),-.2955em -.3725em 0 rgba(0,0,0,.28667),-.303em -.366em 0 rgba(0,0,0,.28),-.3105em -.36em 0 rgba(0,0,0,.27333),-.318em -.353em 0 rgba(0,0,0,.26667),-.3255em -.3465em 0 rgba(0,0,0,.26),-.3325em -.3395em 0 rgba(0,0,0,.25333),-.3395em -.3325em 0 rgba(0,0,0,.24667),-.3465em -.3255em 0 rgba(0,0,0,.24),-.353em -.318em 0 rgba(0,0,0,.23333),-.36em -.3105em 0 rgba(0,0,0,.22667),-.366em -.303em 0 rgba(0,0,0,.22),-.3725em -.2955em 0 rgba(0,0,0,.21333),-.3785em -.2875em 0 rgba(0,0,0,.20667),-.3845em -.2795em 0 rgba(0,0,0,.2),-.3905em -.2715em 0 rgba(0,0,0,.19333),-.396em -.263em 0 rgba(0,0,0,.18667),-.4015em -.255em 0 rgba(0,0,0,.18),-.4065em -.2465em 0 rgba(0,0,0,.17333),-.4115em -.238em 0 rgba(0,0,0,.16667),-.4165em -.229em 0 rgba(0,0,0,.16),-.421em -.2205em 0 rgba(0,0,0,.15333),-.4255em -.2115em 0 rgba(0,0,0,.14667),-.43em -.2025em 0 rgba(0,0,0,.14),-.434em -.1935em 0 rgba(0,0,0,.13333),-.438em -.1845em 0 rgba(0,0,0,.12667),-.442em -.175em 0 rgba(0,0,0,.12),-.4455em -.166em 0 rgba(0,0,0,.11333),-.449em -.1565em 0 rgba(0,0,0,.10667),-.452em -.147em 0 rgba(0,0,0,.1),-.455em -.1375em 0 rgba(0,0,0,.09333),-.458em -.128em 0 rgba(0,0,0,.08667),-.4605em -.1185em 0 rgba(0,0,0,.08),-.4625em -.1085em 0 rgba(0,0,0,.07333),-.465em -.099em 0 rgba(0,0,0,.06667),-.467em -.0895em 0 rgba(0,0,0,.06),-.4685em -.0795em 0 rgba(0,0,0,.05333),-.47em -.0695em 0 rgba(0,0,0,.04667),-.4715em -.06em 0 rgba(0,0,0,.04),-.4725em -.05em 0 rgba(0,0,0,.03333),-.4735em -.04em 0 rgba(0,0,0,.02667),-.4745em -.03em 0 rgba(0,0,0,.02),-.475em -.02em 0 rgba(0,0,0,.01333),-.475em -.01em 0 rgba(0,0,0,.00667);
+    position:fixed;
+    top:3.5em;
+    left:50%;
+    z-index:2010;
+    vertical-align:middle;
+    margin:-.05em 0 0 -.05em;
+    opacity:.45;
+    font-size:70px;
+    
+    // -moz-border-radius:50%;
+    // -webkit-border-radius:50%;
+    border-radius:50%;
+    // -moz-animation:GalaxyAccountsFrameContainer-spin .7s linear infinite;
+    // -o-animation:GalaxyAccountsFrameContainer-spin .7s linear infinite;
+    // -webkit-animation:GalaxyAccountsFrameContainer-spin .7s linear infinite;
+    animation:GalaxyAccountsFrameContainer-spin .7s linear infinite;
+    // -moz-transition:translate3d(0,0,0);
+    // -o-transition:translate3d(0,0,0);
+    // -webkit-transition:translate3d(0,0,0);
+    transition:translate3d(0,0,0)''
+}
+
+#__POSITION_PARAM__:before{
+    position:absolute;
+    z-index:auto;
+}
+
+.no-cssanimations#GalaxyAccountsFrameContainer:before,.no-csspseudoanimations#GalaxyAccountsFrameContainer:before{
+    width:32px;
+    height:32px;
+    margin-left:-16px;
+    // -moz-box-shadow:none;
+    // -webkit-box-shadow:none;
+    box-shadow:none;
+    background:url(https://login.gog.com/bundles/gogloginlogin/images/flb-modal-spin.gif);
+}
+
+.GalaxyAccountsFrameContainer__container{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:2030;
+    overflow:hidden;
+    opacity:0;
+    // -moz-transition:opacity .15s linear;
+    // -o-transition:opacity .15s linear;
+    // -webkit-transition:opacity .15s linear;
+    transition: opacity .15s linear;
+    // -moz-transform:translate3d(0,0,0);
+    // -ms-transform:translate3d(0,0,0);
+    // -o-transform:translate3d(0,0,0);
+    // -webkit-transform:translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+
+.GalaxyAccountsFrameContainer__container iframe{
+    display:block;
+    width:100%;
+    height:100%;
+    background:0 0;
+    border:none;
+}
+
+.__POSITION_PARAM____container{
+    position:absolute;
+    z-index:auto;
+}
+
+.GalaxyAccountsFrameContainer__overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    z-index:2000;
+    background:rgba(204,204,204,.5);
+}
+
+.GalaxyAccountsFrameContainer__measure{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+}
+
+.GalaxyAccountsFrameContainer__measure.no-cssanimations{
+    background:url(https://login.gog.com/bundles/gogloginlogin/images/flb-modal-spin.gif);
+}
+
+.l-mobile .GalaxyAccountsFrameContainer__container{
+    margin-top:130px;
+}
+
+.l-mobile.GalaxyAccountsFrameContainer__overlay{
+    position:absolute;
+}
+
+.l-small-screen#GalaxyAccountsFrameContainer:before{
+    top:50%;
+    margin-top:-.05em;
+}
+
+.l-small-screen>.GalaxyAccountsFrameContainer__container{
+    vertical-align:middle;
+    margin-top:-15px;
+}
+
+.l-loaded#GalaxyAccountsFrameContainer:before{
+    content:none;
+}
+
+.l-loaded .GalaxyAccountsFrameContainer__container{
+    opacity:1;
+}
+
+#GalaxyAccountsMessageBar{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:auto;
+    z-index:2040;
+    background-color:rgba(222,222,222,.9);
+    color:#595959;
+    font-size:.75rem;
+    line-height:1.5;
+    padding:.5rem 1rem;
+    // -moz-box-sizing:border-box;
+    // -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    // -moz-box-shadow:0 0 15px rgba(0,0,0,.15),0 1px 3px rgba(0,0,0,.15);
+    // -webkit-box-shadow:0 0 15px rgba(0,0,0,.15),0 1px 3px rgba(0,0,0,.15);
+    box-shadow:0 0 15px rgba(0,0,0,.15),0 1px 3px rgba(0,0,0,.15);
+    text-align:center;
+}
+
+#GalaxyAccountsMessageBar a:not(:hover){
+    background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iY3VycmVudENvbG9yIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSJjdXJyZW50Q29sb3IiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=);
+    background-size:100%;
+    // background-image:-webkit-gradient(linear,0 50%,100% 50%,color-stop(0,currentColor),color-stop(100%,currentColor));background-image:-moz-linear-gradient(left,currentColor,currentColor);
+    // background-image:-o-linear-gradient(left,currentColor,currentColor);
+    // background-image:-webkit-linear-gradient(left,currentColor,currentColor);
+    background-image:linear-gradient(to right,currentColor,currentColor);
+}
+
+#GalaxyAccountsMessageBarContent{
+    max-width:1060px;
+    display:inline-block;
+    vertical-align:middle;
+    text-align:left;
 }

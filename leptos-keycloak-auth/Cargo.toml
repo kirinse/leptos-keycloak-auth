@@ -23,7 +23,10 @@ http = "1.2.0"
 itertools = "0.14.0"
 jsonwebtoken = "9.3.0"
 leptos = "0.7.4"
-leptos-use = { version = "0.15.5", default-features = false, features = ["use_interval", "storage"] }
+leptos-use = { version = "0.15.5", default-features = false, features = [
+    "use_interval",
+    "storage",
+] }
 leptos_router = "0.7.4"
 rand = "0.9.0"
 reqwest = { version = "0.12.12", features = ["json"] }
@@ -41,14 +44,17 @@ assertr = "0.1.0"
 axum = "0.8.1"
 # Must stick to 0.7 until leptos is updated to 0.8 (which brings support for axum 0.8).
 axum-keycloak-auth = "0.7.0"
-chrome-for-testing-manager = { version = "0.5.0", features = ["thirtyfour"] }
+chrome-for-testing-manager = { git = "https://github.com/kirinse/chrome-for-testing-manager", features = ["thirtyfour"] }
 http = "1.2.0"
-keycloak = "26.1.0"
+keycloak = "26.2.0"
 testcontainers = "0.23.1"
 thirtyfour = "0.35.0"
-tokio = "1.43.0"
+tokio = "1.44.2"
 tokio-process-tools = "0.4.0"
 tower = "0.5.2"
 tower-http = { version = "0.6.2", features = ["full"] }
 tracing-subscriber = "0.3.19"
 uuid = { version = "1.12.1", features = ["v7", "serde"] }
+
+[patch.crates-io]
+ring = { git = "https://github.com/kirinse/ring", branch = "main" }

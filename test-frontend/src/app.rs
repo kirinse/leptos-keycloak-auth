@@ -1,6 +1,11 @@
+use std::ops::Deref;
+
 use crate::routes::routes;
-use leptonic::atoms::button::LinkTarget;
+use gloo_utils::format::JsValueSerdeExt;
 use leptonic::components::prelude::*;
+use leptos::ev::message;
+use leptos::html::Iframe;
+use leptos::portal::Portal;
 use leptos::prelude::*;
 use leptos_keycloak_auth::components::{DebugState, ShowWhenAuthenticated};
 use leptos_keycloak_auth::url::Url;
@@ -10,6 +15,10 @@ use leptos_keycloak_auth::{
 };
 use leptos_meta::{Meta, MetaTags, Stylesheet, Title, provide_meta_context};
 use leptos_router::components::*;
+use leptos_use::{UseTimeoutFnReturn, use_event_listener, use_timeout_fn, use_window};
+use serde::{Deserialize, Serialize};
+use wasm_bindgen::JsValue;
+use web_sys::HtmlIFrameElement;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -27,6 +36,54 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
             </body>
         </html>
     }
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(tag = "action", content = "data", rename_all = "camelCase")]
+pub enum RcvMessage {
+    Close,
+    Reload,
+    RegisterContentDimensions {},
+    FirstIframeLoad {
+        origin: String,
+    },
+    #[serde(rename_all = "camelCase")]
+    ContentLoaded {
+        content_type: String,
+    },
+    #[serde(rename_all = "camelCase")]
+    FormSubmission {
+        form_type: String,
+    },
+    InputFocused {},
+    InputBlured,
+    BeforeIframeLocationChange {
+        event: String,
+    },
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(tag = "action", content = "data", rename_all = "camelCase")]
+pub enum SndMessage {
+    RegisterOrigin {
+        origin: String,
+    },
+    ContainerIsReady,
+    ViewportResize,
+    IframeResize,
+    EnvironmentResize,
+    FocusOnInput,
+    #[serde(rename_all = "camelCase")]
+    LoadContent {
+        content_type: String,
+    },
+    ProceedWithLocationChange {
+        event: String,
+    },
+    UpdateInputField,
+    SelectField,
+    ClickOnField,
+    GamepadBackButtonPressed,
 }
 
 #[component]
@@ -59,6 +116,7 @@ pub fn App() -> impl IntoView {
                     { routes::generated_routes() }
                 </Router>
             </main>
+            <div class="GalaxyAccountsFrameContainer__measure"></div>
         </Root>
     }
 }
@@ -123,31 +181,31 @@ pub fn MyAccount() -> impl IntoView {
     let logout_url = Signal::derive(move || auth.logout_url.get().map(|url| url.to_string()));
     let logout_url_unavailable = Signal::derive(move || logout_url.get().is_none());
 
-    let who_am_i = LocalResource::new(move || {
-        let client = authenticated.client();
-        async move {
-            client
-                .get("http://127.0.0.1:9999/who-am-i")
-                .await
-                .unwrap()
-                .json::<WhoAmIResponse>()
-                .await
-                .unwrap()
-        }
-    });
+    // let who_am_i = LocalResource::new(move || {
+    //     let client = authenticated.client();
+    //     async move {
+    //         client
+    //             .get("http://127.0.0.1:9999/who-am-i")
+    //             .await
+    //             .unwrap()
+    //             .json::<WhoAmIResponse>()
+    //             .await
+    //             .unwrap()
+    //     }
+    // });
 
     view! {
         <h1 id="greeting">
             "Hello, " { move || user_name.get() } "!"
         </h1>
 
-        <Suspense fallback=|| view! { "" }>
-            { move || who_am_i.get().map(|who_am_i| view! {
-                <div>"username: " <span id="username">{ who_am_i.username.clone() }</span></div>
-                <div>"keycloak_uuid: " <span id="keycloak_uuid">{ who_am_i.keycloak_uuid.clone() }</span></div>
-                <div>"token_valid_for_whole_seconds: " <span id="token_valid_for_whole_seconds">{ who_am_i.token_valid_for_whole_seconds }</span></div>
-            }) }
-        </Suspense>
+        // <Suspense fallback=|| view! { "" }>
+        //     { move || who_am_i.get().map(|who_am_i| view! {
+        //         <div>"username: " <span id="username">{ who_am_i.username.clone() }</span></div>
+        //         <div>"keycloak_uuid: " <span id="keycloak_uuid">{ who_am_i.keycloak_uuid.clone() }</span></div>
+        //         <div>"token_valid_for_whole_seconds: " <span id="token_valid_for_whole_seconds">{ who_am_i.token_valid_for_whole_seconds }</span></div>
+        //     }) }
+        // </Suspense>
 
         <pre id="auth-state" style="width: 100%; overflow: auto;">
             { move || auth_state.read()() }
@@ -198,14 +256,14 @@ pub fn Protected(children: ChildrenFn) -> impl IntoView {
                 let keycloak_server_url = format!("http://localhost:{port}");
                 let _auth = init_keycloak_auth(UseKeycloakAuthOptions {
                     keycloak_server_url: Url::parse(&keycloak_server_url).unwrap(),
-                    realm: "test-realm".to_owned(),
-                    client_id: "test-client".to_owned(),
+                    realm: "myrealm".to_owned(),
+                    client_id: "myclient".to_owned(),
                     post_login_redirect_url: to_current_url(),
                     post_logout_redirect_url: to_current_url(),
                     scope: vec![],
                     id_token_validation: ValidationOptions {
-                        expected_audiences: Some(vec!["test-client".to_owned()]),
-                        expected_issuers: Some(vec![format!("{keycloak_server_url}/realms/test-realm")]),
+                        expected_audiences: Some(vec!["myclient".to_owned()]),
+                        expected_issuers: Some(vec![format!("{keycloak_server_url}/realms/myrealm")]),
                     },
                     delay_during_hydration: false,
                     advanced: Default::default(),
@@ -222,6 +280,22 @@ pub fn Protected(children: ChildrenFn) -> impl IntoView {
     }
 }
 
+fn get_origin() -> String {
+    if let Some(window) = use_window().deref() {
+        let origin = window.location().origin().unwrap_or_else(|_| {
+            let location = window.location();
+            format!(
+                "{}//{}{}",
+                location.protocol().unwrap_or_default(),
+                location.hostname().unwrap_or_default(),
+                location.port().unwrap_or_default()
+            )
+        });
+        return origin;
+    }
+    "*".into()
+}
+
 #[component]
 pub fn Login() -> impl IntoView {
     let auth = expect_keycloak_auth();
@@ -235,6 +309,108 @@ pub fn Login() -> impl IntoView {
     let keycloak_port = expect_context::<KeycloakPort>();
     let auth_state = Signal::derive(move || auth.state_pretty_printer());
 
+    let (openned, set_openned) = signal(false);
+    let (loaded, set_loaded) = signal(false);
+
+    let mut origin = "*".to_string();
+
+    let frame_ref = NodeRef::<Iframe>::new();
+    let frame_window = move || {
+        frame_ref
+            .get()
+            .map(|f| f.content_window().unwrap())
+            .unwrap()
+    };
+
+    let UseTimeoutFnReturn { start: _, .. } = use_timeout_fn(
+        |node: HtmlIFrameElement| {
+            if let Some(w) = node.content_window() {
+                let origin = window().location().origin().unwrap_or_else(|_| {
+                    format!(
+                        "{}//{}{}",
+                        window().location().protocol().unwrap_or_default(),
+                        window().location().hostname().unwrap_or_default(),
+                        window().location().port().unwrap_or_default()
+                    )
+                });
+                let res = w.post_message(
+                    JsValue::from_serde(&SndMessage::RegisterOrigin { origin })
+                        .unwrap()
+                        .as_ref(),
+                    "*",
+                );
+                leptos::logging::log!("{:?}", res);
+            }
+        },
+        1000.0,
+    );
+
+    Effect::new(move |_| {
+        if !openned.get() {
+            set_loaded.set(false);
+        }
+    });
+
+    let _cleanup = use_event_listener(window(), message, move |evt| {
+        let src = evt.source();
+        tracing::debug!("{:?}", &evt.data());
+        // let f = frame_ref.get().map(|f| f.content_window().unwrap());
+        // logging::log!("src = {:?}, frame = {:?}, {}", &src, &f, src == f,);
+        // check event source
+        if src != Some(frame_window().into()) {
+            return;
+        }
+        let data = evt.data().into_serde::<RcvMessage>();
+        tracing::debug!(?data);
+        if let Ok(msg) = data {
+            match msg {
+                RcvMessage::Close => set_openned.set(false),
+                RcvMessage::Reload => window().location().reload().unwrap_or_default(),
+                RcvMessage::RegisterContentDimensions {} => {
+                    set_loaded.set(true);
+                    let _ = frame_window().post_message(
+                        JsValue::from_serde(&SndMessage::ContainerIsReady)
+                            .unwrap()
+                            .as_ref(),
+                        &origin,
+                    );
+                }
+                RcvMessage::BeforeIframeLocationChange { event } => {
+                    set_loaded.set(false);
+                    let _ = frame_window().post_message(
+                        JsValue::from_serde(&SndMessage::ProceedWithLocationChange { event })
+                            .unwrap()
+                            .as_ref(),
+                        &origin,
+                    );
+                }
+                RcvMessage::FirstIframeLoad { origin: ori } => {
+                    origin = ori;
+                    let _ = frame_window().post_message(
+                        JsValue::from_serde(&SndMessage::RegisterOrigin {
+                            origin: get_origin(),
+                        })
+                        .unwrap()
+                        .as_ref(),
+                        &origin,
+                    );
+                    let _ = frame_window().post_message(
+                        JsValue::from_serde(&SndMessage::LoadContent {
+                            content_type: String::new(),
+                        })
+                        .unwrap()
+                        .as_ref(),
+                        &origin,
+                    );
+                }
+                RcvMessage::ContentLoaded { content_type: _ } => {
+                    set_loaded.set(true);
+                }
+                _ => {}
+            }
+        }
+    });
+
     view! {
        <h1 id="unauthenticated">"Unauthenticated"</h1>
 
@@ -246,16 +422,35 @@ pub fn Login() -> impl IntoView {
             { move || auth_state.read()() }
         </pre>
 
-        <LinkButton
-            href=move || login_url.get()
-            target=LinkTarget::_Self
+        <Button
             disabled=login_url_unavailable
+            on_press={move |_| {
+                set_openned.set(!openned.get());
+            }}
         >
             "Log in"
-        </LinkButton>
+        </Button>
 
         <LinkButton attr:id="back-to-root" href=routes::Root.materialize() attr:style="margin-top: 3em;">
             "Back to root"
         </LinkButton>
+
+        {move || openned.with(|open| {
+            if *open {
+                view!{
+                    <Portal mount={document().body().unwrap()}>
+                        <div class="GalaxyAccountsFrameContainer__overlay"></div>
+                        <div id="GalaxyAccountsFrameContainer" class=("l-loaded", loaded)>
+                            <div class="GalaxyAccountsFrameContainer__container">
+                                <iframe node_ref={frame_ref} id="GalaxyAccountsFrame" name="galaxyAccounts" src={move || login_url.get()}>
+                                </iframe>
+                            </div>
+                        </div>
+                    </Portal>
+                }.into_any()
+            } else {
+                view!{<></>}.into_any()
+            }
+        })}
     }
 }
