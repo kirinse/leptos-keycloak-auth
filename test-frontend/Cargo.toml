@@ -18,19 +18,19 @@ opt-level = 3
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-axum = { version = "0.7.9", optional = true }
+axum = { version = "0.8", optional = true }
 axum-server = { version = "0.7.1", features = ["tls-rustls"], optional = true }
 console_error_panic_hook = "0.1.7"
 dotenvy = "0.15.7"
-leptonic = { git = "https://github.com/lpotthast/leptonic", branch = "migrate-to-leptos-0.7" }
-leptos = { version = "0.7.4", features = [] }
+# leptonic = { git = "https://github.com/lpotthast/leptonic", branch = "migrate-to-leptos-0.7" }
+leptos = { version = "0.8", features = [] }
 leptos-keycloak-auth = { path = "../leptos-keycloak-auth", features = [
     "internals",
 ] }
-leptos-routes = "0.3.0"
-leptos_axum = { version = "0.7.4", optional = true }
-leptos_meta = { version = "0.7.4", features = [] }
-leptos_router = { version = "0.7.4", features = [] }
+leptos-routes = { git = "https://github.com/kirinse/leptos-routes" }
+leptos_axum = { version = "0.8", optional = true }
+leptos_meta = { version = "0.8", features = [] }
+leptos_router = { version = "0.8", features = [] }
 serde = "1.0.217"
 tokio = { version = "1.44.2", features = ["rt-multi-thread"], optional = true }
 tower = { version = "0.5.2", optional = true }
@@ -40,17 +40,16 @@ tracing-subscriber = { version = "0.3.19", optional = true }
 tracing-wasm = { version = "0.2.1", optional = true }
 wasm-bindgen = "0.2.100"
 getrandom = { version = "0.3", features = ["wasm_js"], optional = true }
-leptos-use = "0.15"
+leptos-use = { git = "https://github.com/Synphonyte/leptos-use", branch = "main" }
 web-sys = "0.3"
 gloo-utils = { version = "0.2", features = ["serde"] }
-
 
 [features]
 hydrate = [
     "dep:tracing-wasm",
     "dep:getrandom",
     "leptos/hydrate",
-    "leptonic/hydrate",
+    # "leptonic/hydrate",
 ]
 ssr = [
     "dep:axum",
@@ -64,7 +63,7 @@ ssr = [
     "leptos_meta/ssr",
     "leptos_router/ssr",
     "leptos-keycloak-auth/ssr",
-    "leptonic/ssr",
+    # "leptonic/ssr",
 ]
 
 [patch.crates-io]
@@ -78,13 +77,13 @@ lto = true
 codegen-units = 1
 panic = "abort"
 
-[package.metadata.leptonic]
-# REQUIRED: Leptonic's build-script will copy the Leptonic themes to this directory. Relative to your project root.
-style-dir = "style"
+# [package.metadata.leptonic]
+# # REQUIRED: Leptonic's build-script will copy the Leptonic themes to this directory. Relative to your project root.
+# style-dir = "style"
 
-# REQUIRED: Leptonic's build-script will copy static JS dependencies to this directory. Relative to your project root.
-# Leptonic's `<Root>` component expects JS files to be available at a "js" directory at runtime (for dynamic script includes). Specify a different prop value if you choose a non-stadard location here. 
-js-dir = "public/js"
+# # REQUIRED: Leptonic's build-script will copy static JS dependencies to this directory. Relative to your project root.
+# # Leptonic's `<Root>` component expects JS files to be available at a "js" directory at runtime (for dynamic script includes). Specify a different prop value if you choose a non-stadard location here. 
+# js-dir = "public/js"
 
 [package.metadata.leptos]
 # The name used by wasm-bindgen/cargo-leptos for the JS/WASM bundle. Defaults to the crate name
@@ -151,3 +150,6 @@ lib-default-features = false
 #
 # Optional. Defaults to "release".
 lib-profile-release = "wasm-release"
+
+# XXX: https://github.com/leptos-rs/cargo-leptos/issues/496
+disable-erase-components = true

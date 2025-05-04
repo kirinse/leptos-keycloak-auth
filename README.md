@@ -172,7 +172,7 @@ You can than still run the UI test by entering `y` and pressing enter or canceli
 ## Leptos compatibility
 
 | Crate version | Compatible Leptos version |
-|---------------|---------------------------|
+| ------------- | ------------------------- |
 | 0.1           | 0.6                       |
 | 0.2           | 0.6                       |
 | 0.3 - 0.5     | 0.7                       |
@@ -199,3 +199,7 @@ instructions: https://github.com/briansmith/ring/issues/1824#issuecomment-205995
 
 The crate was initially based on the fantastic work of [leptos_oidc](https://gitlab.com/kerkmann/leptos_oidc).
 Definitely check this out as well if you do not want a Keycloak specific dependency.
+
+```sh
+KEYCLOAK_PORT=8080 cargo leptos watch
+```

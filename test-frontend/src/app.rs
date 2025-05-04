@@ -2,11 +2,11 @@ use std::ops::Deref;
 
 use crate::routes::routes;
 use gloo_utils::format::JsValueSerdeExt;
-use leptonic::components::prelude::*;
 use leptos::ev::message;
 use leptos::html::Iframe;
 use leptos::portal::Portal;
 use leptos::prelude::*;
+use leptos::tachys::renderer::dom::Event;
 use leptos_keycloak_auth::components::{DebugState, ShowWhenAuthenticated};
 use leptos_keycloak_auth::url::Url;
 use leptos_keycloak_auth::{
@@ -101,7 +101,7 @@ pub fn App() -> impl IntoView {
 
         <Title text="Leptonic SSR template"/>
 
-        <Root default_theme=LeptonicTheme::default()>
+        // <Root default_theme=LeptonicTheme::default()>
             <main style=r#"
                 height: 100%;
                 width: 100%;
@@ -117,7 +117,7 @@ pub fn App() -> impl IntoView {
                 </Router>
             </main>
             <div class="GalaxyAccountsFrameContainer__measure"></div>
-        </Root>
+        // </Root>
     }
 }
 
@@ -133,23 +133,23 @@ pub fn Welcome() -> impl IntoView {
     let (count, set_count) = signal(0);
 
     view! {
-        <h2>"Welcome to Leptonic"</h2>
+        <h2>Welcome to Leptonic</h2>
 
-        <LinkButton attr:id="to-public" href=routes::root::Public.materialize().strip_prefix("/").unwrap().to_string()>
-            "Public area"
-        </LinkButton>
+        <a id="to-public" href=routes::root::Public.materialize().strip_prefix("/").unwrap().to_string()>
+            Public area
+        </a>
 
-        <LinkButton attr:id="to-my-account" href=routes::root::MyAccount.materialize()>
+        <a id="to-my-account" href=routes::root::MyAccount.materialize()>
             "My Account"
-        </LinkButton>
+        </a>
 
         <span id="count" style="margin-top: 3em;">
             "Count: " { move || count.get() }
         </span>
 
-        <Button attr:id="increase" on_press=move|_| set_count.update(|c| *c += 1)>
-            "Increase"
-        </Button>
+        <button id="increase" on:click:target=move|_| set_count.update(|c| *c += 1)>
+            Increase
+        </button>
     }
 }
 
@@ -158,9 +158,9 @@ pub fn Public() -> impl IntoView {
     view! {
         <h2>"Welcome to Leptonic"</h2>
 
-        <LinkButton attr:id="to-my-account" href=routes::Root.materialize()>
-            "Back"
-        </LinkButton>
+        <a id="to-my-account" href=routes::Root.materialize()>
+            Back
+        </a>
     }
 }
 
@@ -210,18 +210,9 @@ pub fn MyAccount() -> impl IntoView {
         <pre id="auth-state" style="width: 100%; overflow: auto;">
             { move || auth_state.read()() }
         </pre>
-
-        <LinkButton attr:id="logout" href=move || logout_url.get().unwrap_or_default() disabled=logout_url_unavailable>
-            "Logout"
-        </LinkButton>
-
-        <Button attr:id="programmatic-logout" on_press=move |_| auth.end_session()>
-            "Programmatic Logout"
-        </Button>
-
-        <LinkButton attr:id="back-to-root" href=routes::Root.materialize() attr:style="margin-top: 3em;">
-            "Back to root"
-        </LinkButton>
+        <a id="logout" href=move || logout_url.get().unwrap_or_default() aria_disabled=logout_url_unavailable>Logout</a>
+        <button id="programmatic-logout" on:click:target=move |_| auth.end_session()>Programmatic Logout</button>
+        <a id="back-to-root" href=routes::Root.materialize() style:margin-top="3em">Back to root</a>
     }
 }
 
@@ -422,18 +413,19 @@ pub fn Login() -> impl IntoView {
             { move || auth_state.read()() }
         </pre>
 
-        <Button
+        <button
             disabled=login_url_unavailable
-            on_press={move |_| {
+            on:click:target={move |_| {
+                tracing::debug!("clicked");
                 set_openned.set(!openned.get());
             }}
         >
-            "Log in"
-        </Button>
+            Log in
+        </button>
 
-        <LinkButton attr:id="back-to-root" href=routes::Root.materialize() attr:style="margin-top: 3em;">
-            "Back to root"
-        </LinkButton>
+        <a id="back-to-root" href=routes::Root.materialize() style="margin-top: 3em;">
+            Back to root
+        </a>
 
         {move || openned.with(|open| {
             if *open {
